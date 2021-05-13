@@ -3,8 +3,36 @@
 .navbar {
   width: 100%;
   height: 124px;
+  display: flex;
   justify-content: space-between;
   padding: $spacing;
+  color: $logo-dark;
   background-color: $block-light;
   box-shadow: $box-shadow;
+
+  &--centered {
+    align-self: center;
+  }
+
+  &--list {
+    display: flex;
+    flex-direction: row;
+
+    li{
+      padding: $spacing-slight;
+      margin: $spacing-slight;
+      border: $button-border-width solid $logo-light;
+      border-radius: $button-border-radius;
+
+      a{
+        color: inherit;
+      }
+    }
+
+    li:hover{
+      border-color: $logo-dark;
+    }
+
+  }
+
 }

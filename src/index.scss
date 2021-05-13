@@ -16,6 +16,14 @@ body {
   background: $light-gray-background;
 }
 
+a {
+  text-decoration: none;
+
+  &:focus, &:hover, &:visited, &:link, &:active {
+      text-decoration: none;
+  }
+}
+
 .heading {
   font-family: $heading-font-family;
 }
@@ -23,16 +31,13 @@ body {
 .layout {
   display: flex;
   min-height: 100vh;
+  flex-direction: column;
 }
 
 // adjust the media queries for this app
 @media only screen and (max-width: 960px) {
   html {
     font-size: 12px;
-  }
-
-  .layout {
-    flex-direction: column;
   }
 }
 

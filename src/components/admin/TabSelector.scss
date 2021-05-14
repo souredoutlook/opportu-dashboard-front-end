@@ -1,0 +1,37 @@
+@import '../../styles/variables.scss';
+
+.tabs {
+  width: 100%;
+  
+  &--list {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding-bottom: $spacing;
+
+    &--item {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      background-color: $assessment-orange;
+      border-right: solid lighten($assessment-orange, 2%) 1px;
+      padding: $spacing-slight;
+      box-shadow: $tab-shadow;
+
+      &:first-of-type {
+        border-top-left-radius: $card-border-radius;
+      }
+      
+      &:last-of-type{
+        border-top-right-radius: $card-border-radius;
+        border-right: none;
+      }
+    }
+      
+  }
+}
+
+.selected {
+  background-color: $white;
+  box-shadow: $tab-shadow-selected;
+}

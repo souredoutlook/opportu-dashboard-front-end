@@ -6,6 +6,7 @@ import Dashboard from './Dashboard';
 import Navbar from './Navbar';
 import SignIn from './SignIn';
 import Welcome from './Welcome';
+import Assessments from './Assessments';
 
 import './Application.scss';
 
@@ -33,6 +34,9 @@ export default function Application() {
         </Route>
         <Route path='/dashboard'>
           {first_name ? <Dashboard /> : <Redirect to='/signin' /> }
+        </Route>
+        <Route path='/assessments/:id'>
+          {first_name ? <Assessments /> : <SignIn setUserData={setUserData} />}
         </Route>
       </main>
     </Router>

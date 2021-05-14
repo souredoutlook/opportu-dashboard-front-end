@@ -29,11 +29,11 @@ export default function SignIn(props) {
     });
   };
 
-  function handleChange(evt) {
-    const value = evt.target.value;
+  function handleChange(event) {
+    const value = event.target.value;
     setFormData((prev) => ({
       ...prev,
-      [evt.target.name]: value,
+      [event.target.name]: value,
     }));
   }
 

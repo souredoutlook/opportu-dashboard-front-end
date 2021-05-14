@@ -22,7 +22,7 @@ export default function Navbar(props) {
       <Link to='/'>
         <img 
           className='navbar--centered'
-          src='images/opportu_retina.svg'
+          src='/images/opportu_retina.svg'
           alt='Opportu Logo'
         />
       </Link>
@@ -32,6 +32,12 @@ export default function Navbar(props) {
           <li>
             <Link to='/admin'>
               Admin
+            </Link>
+          </li>}
+          {userData.first_name && 
+          <li>
+            <Link to='/dashboard'>
+              Dashboard
             </Link>
           </li>}
           {userData.first_name && <li onClick={signOut}>Sign Out</li>}

@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-export default function Admin(props) {
+import CreateUser from './admin/CreateUser';
 
-  const loc = JSON.stringify(props.location);
+import './Admin.scss';
+
+export default function Admin() {
+
+  const [activeTab, setActiveTab] = useState(<CreateUser />);
 
   return (
-    <div className="container">
-      <h3>Admin Page</h3>
-      <p className="flow-text">{loc}</p>
-    </div>
+    <section className="admin">
+      <article className="admin--card">
+        {activeTab}
+      </article>
+    </section>
   );
 };

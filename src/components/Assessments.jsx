@@ -5,17 +5,19 @@ import { useParams } from 'react-router-dom';
 import Draggable from './assessments/Draggable';
 import DroppableList from './assessments/DroppableList';
 
+import coreValues from '../helpers/coreValues'
+
 import './Assessments.scss';
 
 export default function Assessments() {
   
   const [parent, setParent] = useState(null);
 
-  const draggableList = [...new Array(10)].map((value, index) => {
+  const draggableList = coreValues.map((value, index) => {
     const id = `draggable${index}`;
     return (
       <Draggable id={id} key={id}>
-        {id}
+        {value}
       </Draggable>
     );
   });

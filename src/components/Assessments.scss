@@ -10,7 +10,7 @@
 
   &--card {
     width: 90%;
-    height: 70vh;
+    padding: $spacing;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -50,6 +50,15 @@
     *{
       padding: $spacing-slight;
     }
+  }
+
+  .row {
+    flex-direction: row;
+
+    
+    // *{
+    //   padding: $spacing-slight;
+    // }
   }
 }
 

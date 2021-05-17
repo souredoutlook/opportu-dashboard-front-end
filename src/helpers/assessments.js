@@ -10,9 +10,10 @@ const parseParents = function(parents) {
       if (parents[cur] && cur !== 'error'){
         //ensures that custom values are not falsey
         console.log(prev, cur);
-        const value = (parents[cur].props && parents[cur].props.children) || parents[cur].custom;
-        const is_custom = !parents[cur].props;
-        prev.push({value, is_custom});
+        const { draggable, value } = parents[cur];
+        console.log(draggable)
+        const is_custom = Boolean(!draggable && value);
+        prev.push({value: (draggable && draggable.props.children) || value, is_custom});
         return prev;
       } else {
         return prev;
@@ -24,7 +25,51 @@ const parseParents = function(parents) {
   }
 };
 
-module.exports = { parseParents };
+const initialState = {
+  error: false,
+  droppable0: {
+    value: "",
+    draggable: null
+  },
+  droppable1: {
+    value: "",
+    draggable: null
+  },
+  droppable2: {
+    value: "",
+    draggable: null
+  },
+  droppable3: {
+    value: "",
+    draggable: null
+  },
+  droppable4: {
+    value: "",
+    draggable: null
+  },
+  droppable5: {
+    value: "",
+    draggable: null
+  },
+  droppable6: {
+    value: "",
+    draggable: null
+  },
+  droppable7: {
+    value: "",
+    draggable: null
+  },
+  droppable8: {
+    value: "",
+    draggable: null
+  },
+  droppable9: {
+    value: "",
+    draggable: null
+  },
+};
+
+module.exports = { parseParents, initialState };
 
 // values: [
 //   { value: 'Ambition', is_custom: false },

@@ -11,7 +11,7 @@ export default function DroppableList(props) {
     const id = `droppable${index}`;
 
     return (
-      <div className="assessment--form--group">
+      <div className="assessment--form--group" key={id}>
         <label htmlFor={id}>#{index + 1}</label>
         <Droppable id={id}>
           {parent && parent[id] ? draggableList.filter(element => element.key === parent[id].key) : 'Drop here'}

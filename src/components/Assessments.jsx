@@ -7,13 +7,13 @@ import Draggable from './assessments/Draggable';
 import DroppableList from './assessments/DroppableList';
 
 import coreValues from '../helpers/coreValues'
-import { parseParents } from '../helpers/assessments'
+import { parseParents, initialState } from '../helpers/assessments'
 
 import './Assessments.scss';
 
 export default function Assessments() {
   
-  const [parent, setParent] = useState({error: false});
+  const [parent, setParent] = useState(initialState);
 
   const draggableList = coreValues.map((value, index) => {
     const id = `draggable${index}`;
@@ -23,22 +23,30 @@ export default function Assessments() {
       </Draggable>
     );
   });
+  
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setParent(prev => ({
+      ...prev,
+      [name]: {...prev[name], value},
+    }));
+  };
 
   function handleDragEnd(event) {
     const {over, active} = event;
-
+    
     //handle when dragEnd happens outside of a droppable area or activeId is already dropped
     for (const value in parent) {
-      if (parent[value] && parent[value].key === active.id) {
-        setParent(prev => ({...prev, [value]: null}));
+      if (parent[value].draggable && parent[value].draggable.key === active.id) {
+        setParent(prev => ({...prev, [value]: {...prev[value], draggable: null}}));
       }
     }
-
+    
     if (over && active) {
-      setParent(prev => ({...prev, [over.id]: draggableList.filter(element => element.key === active.id)[0]}));
+      setParent(prev => ({...prev, [over.id]: {...prev[over.id], draggable: draggableList.filter(element => element.key === active.id)[0]}}));
     }
-  }
-
+  };
+  
   const { id } = useParams();
 
   function submit() {
@@ -68,12 +76,13 @@ export default function Assessments() {
               <DroppableList 
                 parent={parent}
                 draggableList={draggableList}
+                handleChange={handleChange}
               />
             </form>
             <form className="assessment--form row wrap">
               {draggableList.filter(element => {
                 for (const value in parent) {
-                  if (parent[value] && parent[value].key === element.key) {
+                  if (parent[value].draggable && parent[value].draggable.key === element.key) {
                     return null 
                   }
                 }

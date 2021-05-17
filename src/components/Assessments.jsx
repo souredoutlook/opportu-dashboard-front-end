@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { DndContext } from '@dnd-kit/core';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 import Draggable from './assessments/Draggable';
 import DroppableList from './assessments/DroppableList';
 
 import coreValues from '../helpers/coreValues'
+import { parseParents } from '../helpers/assessments'
 
 import './Assessments.scss';
 
 export default function Assessments() {
   
-  const [parent, setParent] = useState(null);
+  const [parent, setParent] = useState({error: false});
 
   const draggableList = coreValues.map((value, index) => {
     const id = `draggable${index}`;
@@ -31,13 +33,30 @@ export default function Assessments() {
         setParent(prev => ({...prev, [value]: null}));
       }
     }
-    
+
     if (over && active) {
       setParent(prev => ({...prev, [over.id]: draggableList.filter(element => element.key === active.id)[0]}));
     }
   }
 
-  let { id } = useParams();
+  const { id } = useParams();
+
+  function submit() {
+
+    axios
+      .put(
+        `/assessments/values/${id}`,
+        {values: parseParents(parent)}
+    )
+    .then(response => {
+      if (response.status === 200) {
+        setParent(prev => ({...prev, error: false}))
+      }
+    })
+    .catch(err => {
+      setParent(prev => ({...prev, error: true}));
+    });
+  };
 
   return (
     <section className="assessment">
@@ -62,6 +81,10 @@ export default function Assessments() {
               })}
             </form>
           </DndContext>
+        </div>
+        <button type="submit" onClick={submit}>Submit Assessment</button>
+        <div className="assessment--error">
+          {parent.error && <p>Something went wrong...</p>}
         </div>
       </article>
     </section>

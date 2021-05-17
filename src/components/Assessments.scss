@@ -36,6 +36,28 @@
       align-items: center;
 
     }
+
+    input:focus, textarea:focus, select:focus{
+      outline: none;
+    }
+
+    button, input {
+      display: inline-block;
+      border: none;
+      padding: 0;
+      margin: 0;
+      text-decoration: none;
+      background: none;
+      font-family: inherit;
+      font-size: inherit;
+      text-align: center;
+      line-height: 1;
+      outline: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      height: 1rem;
+      width: 10rem;
+    }
     
     button {
       display: inline-block;

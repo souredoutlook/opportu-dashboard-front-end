@@ -20,8 +20,8 @@ export default function SignIn(props) {
     )
     .then(response => {
       if (response.status === 200) {
-        setUserData({...response.data});
         setFormData({error: false});
+        setUserData({...response.data});
       }
     })
     .catch(err => {

@@ -16,8 +16,8 @@ export default function Draggable(props) {
   const onClick = (event)=> {
     event.preventDefault(); 
   }
-  return (
-    <button ref={setNodeRef} style={style} {...listeners} {...attributes} onClick={onClick}>
+  return ( 
+    <button className='draggable' ref={setNodeRef} style={style} {...listeners} {...attributes} onClick={onClick}>
       {props.children}
     </button>
   );

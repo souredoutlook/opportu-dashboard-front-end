@@ -24,15 +24,16 @@ export default function Assessments() {
 
   function handleDragEnd(event) {
     const {over, active} = event;
+
+    //handle when dragEnd happens outside of a droppable area or activeId is already dropped
+    for (const value in parent) {
+      if (parent[value] && parent[value].key === active.id) {
+        setParent(prev => ({...prev, [value]: null}));
+      }
+    }
+    
     if (over && active) {
       setParent(prev => ({...prev, [over.id]: draggableList.filter(element => element.key === active.id)[0]}));
-    } else {
-      //when dragEnd happens outside of a droppable area
-      for (const value in parent) {
-        if (parent[value] && parent[value].key === active.id) {
-          setParent(prev => ({...prev, [value]: null}));
-        }
-      }
     }
   }
 
@@ -42,15 +43,15 @@ export default function Assessments() {
     <section className="assessment">
       <article className="assessment--card">
         <h3>Core Values Assessment id #{id}</h3>
-        <div className="assessment--form row">
+        <div className="assessment--form">
           <DndContext onDragEnd={handleDragEnd} >
-            <form className="assessment--form">
+            <form className="assessment--form wrap droppable">
               <DroppableList 
                 parent={parent}
                 draggableList={draggableList}
               />
             </form>
-            <form className="assessment--form row--wrap">
+            <form className="assessment--form row wrap">
               {draggableList.filter(element => {
                 for (const value in parent) {
                   if (parent[value] && parent[value].key === element.key) {

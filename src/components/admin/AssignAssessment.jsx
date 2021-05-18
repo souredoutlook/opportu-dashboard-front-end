@@ -6,9 +6,9 @@ import '../Admin.scss';
 export default function AssignAssessment() {
 
   const [userData, setUserData] = useState([]);
-  const [formData, setFormData] = useState({error: false});
+  const [formData, setFormData] = useState({userId: 0, error: false, message: null});
   
-  const nameList = userData.map((row, index) => {
+  const nameList = userData.map(row => {
     const string = `${row.first_name} ${row.last_name}${row.group_name ? ' - ' + row.group_name : ''}`;
 
     return(
@@ -44,7 +44,7 @@ export default function AssignAssessment() {
     .then(response => {
       if (response.status === 200) {
         console.log(response.data);
-        setFormData({error: false});
+        setFormData({userId: 0, error: false, message: "Successful assignment!"});
       }
     })
     .catch(err => {
@@ -59,6 +59,7 @@ export default function AssignAssessment() {
     setFormData((prev) => ({
       ...prev,
       userId: id,
+      message: null,
     }));
   }
 
@@ -72,7 +73,7 @@ export default function AssignAssessment() {
             name="name"
             id="name"
             onChange={handleChange}
-            defaultValue={0}
+            value={formData.userId}
           >
             <option value={0}>Select a user...</option>
             {nameList}
@@ -82,6 +83,8 @@ export default function AssignAssessment() {
       <button type="submit" onClick={assignAssessment}>Assign Assessment</button>
       <div className="admin--error">
         {formData.error && <p>Something went wrong...</p>}
+        {formData.message && <p>{formData.message}</p>}
+
       </div>
     </>
   );

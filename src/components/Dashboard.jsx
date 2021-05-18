@@ -1,13 +1,20 @@
 import React from 'react';
 
+import './Dashboard.scss';
+
 export default function Dashboard(props) {
 
-  const loc = JSON.stringify(props.location);
-
   return (
-    <div className="container">
-      <h3>Dashboard Page</h3>
-      <p className="flow-text">{loc}</p>
-    </div>
+    <section className="dashboard">
+      <article className="dashboard--card">
+        <h3>Root Values</h3>
+      </article>
+      <article className="dashboard--card">
+      </article>
+      <article className="dashboard--card">
+      </article>
+      <article className="dashboard--card">
+      </article>
+    </section>
   );
 };

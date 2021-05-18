@@ -29,7 +29,7 @@ export default function AssignAssessment() {
       }
     })
     .catch(err => {
-      console.log(err);
+      setFormData(prev => ({...prev, error: true}));
     });
   }, []);
 
@@ -43,12 +43,10 @@ export default function AssignAssessment() {
     )
     .then(response => {
       if (response.status === 200) {
-        console.log(response.data);
         setFormData({userId: 0, error: false, message: "Successful assignment!"});
       }
     })
     .catch(err => {
-      console.log(err);
       setFormData({error: true}); 
     });
   };

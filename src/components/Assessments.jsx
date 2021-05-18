@@ -77,6 +77,7 @@ export default function Assessments() {
     .then(response => {
       if (response.status === 200) {
         setParent(prev => ({...prev, error: false}))
+        setFormState(COMPLETE);
       }
     })
     .catch(err => {

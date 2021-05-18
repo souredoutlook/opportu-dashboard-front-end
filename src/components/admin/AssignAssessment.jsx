@@ -72,8 +72,9 @@ export default function AssignAssessment() {
             name="name"
             id="name"
             onChange={handleChange}
+            defaultValue={0}
           >
-            <option value={0} selected>Select a user...</option>
+            <option value={0}>Select a user...</option>
             {nameList}
           </select>
         </div>

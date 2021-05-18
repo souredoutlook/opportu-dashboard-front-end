@@ -7,7 +7,7 @@ export default function Droppable(props) {
   });
 
   const style = {
-    opacity: isOver || props.children !== 'Drop here' ? 1 : 0.5,
+    border: isOver ? '0.125em solid #E09D4B' : 'none',
   };
 
   return (

@@ -14,7 +14,7 @@ export default function Application() {
   
   const [userData, setUserData] = useState({});
 
-  const { first_name, last_name, is_admin } = userData;
+  const { first_name, id } = userData;
 
   return (
     <Router>
@@ -33,7 +33,7 @@ export default function Application() {
           {first_name ? <Redirect to='/dashboard' /> : <SignIn setUserData={setUserData} /> }
         </Route>
         <Route path='/dashboard'>
-          {first_name ? <Dashboard /> : <Redirect to='/signin' /> }
+          {first_name ? <Dashboard id={id}/> : <Redirect to='/signin' /> }
         </Route>
         <Route path='/assessments/:id'>
           {first_name ? <Assessments /> : <SignIn setUserData={setUserData} />}

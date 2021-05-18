@@ -69,15 +69,11 @@ const initialState = {
   },
 };
 
-module.exports = { parseParents, initialState };
+const constants = {
+  FORBIDDEN: 'FORBIDDEN',
+  COMPLETE: 'COMPLETE',
+  INCOMPLETE: 'INCOMPLETE',
+  LOADING: 'LOADING',
+}
 
-// values: [
-//   { value: 'Ambition', is_custom: false },
-//   { value: 'Authority', is_custom: false },
-//   { value: 'Autonomy', is_custom: false },
-//   { value: 'Beauty', is_custom: false },
-//   { value: 'Belonging', is_custom: false },
-//   { value: 'Boldness', is_custom: false },
-//   { value: 'Buoyancy', is_custom: false },
-//   { value: 'Calm', is_custom: false },
-//   { value: 'Celebrity/Fame', is_custom: false },
+module.exports = { parseParents, initialState, constants };

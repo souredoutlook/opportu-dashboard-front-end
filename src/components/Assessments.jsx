@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { DndContext } from '@dnd-kit/core';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import Draggable from './assessments/Draggable';
@@ -119,7 +120,14 @@ export default function Assessments() {
           </>
           ) 
         }
-        {formState === COMPLETE && <h3>This assessment has been completed...</h3>}
+        {formState === COMPLETE &&
+          <>
+            <h3>This assessment has been completed!</h3>
+            <Link to='/dashboard'>
+              <p>See the results in your Dashboard</p>
+            </Link>
+          </>
+        }
         {formState === FORBIDDEN && <h3>This assessment does not belong to your account...</h3>}
       </article>
     </section>

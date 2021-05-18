@@ -7,7 +7,7 @@ import '../Admin.scss';
 
 export default function CreateUser() {
 
-  const [formData, setFormData] = useState({error: false});
+  const [formData, setFormData] = useState({error: false, message: null});
 
   const createUser =  ()=> {
     const { first_name, last_name, email } = formData;
@@ -21,7 +21,7 @@ export default function CreateUser() {
       if (response.status === 200) {
         console.log("email: ", email);
         console.log("password: ", password);
-        setFormData({error: false});
+        setFormData({error: false, message: `Successfully created new user: ${first_name} ${last_name}!`});
       }
     })
     .catch(err => {
@@ -34,6 +34,7 @@ export default function CreateUser() {
     setFormData((prev) => ({
       ...prev,
       [evt.target.name]: value,
+      message: null,
     }));
   }
 
@@ -75,6 +76,7 @@ export default function CreateUser() {
       <button type="submit" onClick={createUser}>Create</button>
       <div className="admin--error">
         {formData.error && <p>The username or password was incorrect, please try again</p>}
+        {formData.message && <p>{formData.message}</p>}
       </div>
     </>
   );

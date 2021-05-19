@@ -20,13 +20,14 @@
     box-shadow: $box-shadow;
   }
 
+  
   &--form {
     padding: $spacing;
     width: 100%;
     display:flex;
     align-items: center;
     flex-direction: column;
-
+    
     &--group {
       width: 60%;
       padding: $spacing-slight;
@@ -35,7 +36,7 @@
       justify-content: space-between;
       align-items: center;
     }
-
+    
   }
   
   &--error {
@@ -44,4 +45,21 @@
     align-items: center;
     border-radius: $card-border-radius;
   }
+
+  @media only screen and (max-width: 600px) {
+    &--card {
+      width: 90%;
+    }
+  
+    &--form {
+      &--group {
+        width: 100%;
+        justify-content: center;
+        * {
+          margin: $spacing-slight;
+        }
+      }
+    }
+  }
 }
+

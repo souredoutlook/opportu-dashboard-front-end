@@ -51,14 +51,22 @@
       padding: $spacing-slight;
     }
   }
+
+  @media only screen and (max-width: 600px) {
+    &--card {
+      width: 90%;
+      height: auto;
+    }
+  
+    &--form {
+      &--group {
+        width: 100%;
+        justify-content: center;
+        * {
+          margin: $spacing-slight;
+        }
+      }
+    }
+  }
 }
 
-select:required:invalid {
-  color: gray;
-}
-// option[value=""][disabled] {
-//   display: none;
-// }
-option {
-  color: black;
-}

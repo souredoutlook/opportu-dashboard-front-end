@@ -126,6 +126,14 @@
     padding: $spacing-slight
   }
 
+  @media only screen and (max-width: 600px) {
+    &--form {
+      &--group {
+        width: auto;
+      }
+    }
+  }
+
 }
 
 @media only screen and (max-width: 702px) {

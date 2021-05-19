@@ -3,7 +3,6 @@
 .dashboard {
   width: 100%;
   height: 100%;
-  // padding: 2.5%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -15,7 +14,6 @@
     padding: $spacing-slight;
     height: $card-height;
     display: flex;
-    align-items: left;
     flex-direction: column;
     color: $logo-dark;
     background-color: $white;
@@ -86,6 +84,15 @@
 
     *{
       padding: $spacing-slight;
+    }
+  }
+
+  @media only screen and (max-width: 960px) {
+    flex-direction: column;
+    flex-wrap: none;
+
+    &--card {
+      width: 80%;
     }
   }
 }

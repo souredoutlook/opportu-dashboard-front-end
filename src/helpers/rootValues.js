@@ -1,7 +1,6 @@
 //src/helpers/rootValues.js
 
 const parseValues = function(rootValues, wordcloud) {
-  console.log(rootValues);
 
   const latest = Object.keys(rootValues).sort((a,b)=>Date.parse(rootValues[b].completed) - Date.parse(rootValues[a].completed))[0];
 

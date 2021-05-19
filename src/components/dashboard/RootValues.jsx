@@ -12,26 +12,28 @@ const callbacks = {
   getWordTooltip: word => `#${-word.value}`,
 }
 
-const options = {
-  colors,
-  fontFamily: 'montserrat',
-  rotations: 0,
-  fontSizes: [30, 50],
-  scale: 'linear',
-};
 
-const size = [300, 300];
-// 300, 300 is minimum size
 
 
 export default function RootValues(props) {
   
+  const [toggleState, setToggleState] = useState(true);
   
   const { rootValues } = props;
   
   const words = parseValues(rootValues, true);
   
-  const [toggleState, setToggleState] = useState(true);
+  const mql = window.matchMedia(
+    '(max-width: 420px)'
+  );
+  
+  const options = {
+    colors,
+    fontFamily: 'montserrat',
+    rotations: 0,
+    fontSizes: mql.matches ? [16, 30] : [20,50],
+    scale: 'linear',
+  };
 
   function handleClick() {
     setToggleState(!toggleState);

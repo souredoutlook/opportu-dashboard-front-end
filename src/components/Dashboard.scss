@@ -23,30 +23,63 @@
     box-shadow: $box-shadow;
   }
 
-  &--form {
-    padding: $spacing;
-    width: 100%;
-    display:flex;
-    align-items: center;
-    flex-direction: column;
-
-    &--group {
-      width: 60%;
-      padding: $spacing-slight;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-  }
-  
-  &--error {
-    padding: $spacing-slight;
-    display: flex;
-    align-items: center;
+  &--toggle {
+    align-self: flex-end;
+    background-color: $logo-dark;
+    width: 2rem;
+    height: 1rem;
     border-radius: $card-border-radius;
+    display: flex;
+
+    &.left {
+      justify-content: left;
+    }
+    
+    &.right {
+      justify-content: right;
+    }
   }
+
+  &--slider {
+    
+    background-color: $logo-light;
+    width: 1rem;
+    height: 1rem;
+    border-radius: $card-border-radius;    
+  }
+
+  &--list {
+    height: 100%;
+    padding: $spacing;
+
+    p{
+      margin: 0.1em;
+    }
+  }
+  // &--form {
+  //   padding: $spacing;
+  //   width: 100%;
+  //   display:flex;
+  //   align-items: center;
+  //   flex-direction: column;
+
+  //   &--group {
+  //     width: 60%;
+  //     padding: $spacing-slight;
+  //     display: flex;
+  //     flex-direction: row;
+  //     justify-content: space-between;
+  //     align-items: center;
+  //   }
+
+  // }
+  
+  // &--error {
+  //   padding: $spacing-slight;
+  //   display: flex;
+  //   align-items: center;
+  //   border-radius: $card-border-radius;
+  // }
 
   .column {
     flex-direction: column;

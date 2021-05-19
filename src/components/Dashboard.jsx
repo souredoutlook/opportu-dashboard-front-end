@@ -26,11 +26,11 @@ export default function Dashboard(props) {
     });
   }, []);
 
-  const rootValues = dashData.assessments && dashData.assessments.core_values || undefined;
+  const rootValues = (dashData.assessments && dashData.assessments.core_values) || undefined;
 
   return (
     <section className="dashboard">
-      <RootValues rootValues={rootValues} />
+      {rootValues && <RootValues rootValues={rootValues} />}
       <article className="dashboard--card">
       </article>
       <article className="dashboard--card">

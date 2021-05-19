@@ -125,14 +125,20 @@
     height: 12rem;
     padding: $spacing-slight
   }
+
 }
 
-select:required:invalid {
-  color: gray;
+@media only screen and (max-width: 702px) {
+  html {
+    font-size: 10px;
+  }
 }
-// option[value=""][disabled] {
-//   display: none;
+// select:required:invalid {
+//   color: gray;
 // }
-option {
-  color: black;
-}
+// // option[value=""][disabled] {
+// //   display: none;
+// // }
+// option {
+//   color: black;
+// }

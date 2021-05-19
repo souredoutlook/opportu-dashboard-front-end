@@ -12,7 +12,7 @@ import { parseParents, initialState, constants } from '../helpers/assessments'
 
 import './Assessments.scss';
 
-const { FORBIDDEN, COMPLETE, LOADING, INCOMPLETE } = constants;
+const { FORBIDDEN, COMPLETE, LOADING, INCOMPLETE, NOTFOUND } = constants;
 export default function Assessments() {
   const [formState, setFormState] = useState(LOADING);
   const [parent, setParent] = useState(initialState);
@@ -64,6 +64,8 @@ export default function Assessments() {
         setFormState(COMPLETE);
       } else if (status === 403) {
         setFormState(FORBIDDEN);
+      } else if (status === 404) {
+        setFormState(NOTFOUND);
       }
     })
   },[])
@@ -129,6 +131,7 @@ export default function Assessments() {
           </>
         }
         {formState === FORBIDDEN && <h3>This assessment does not belong to your account...</h3>}
+        {formState === NOTFOUND && <h3>Assessment not found...</h3>}
       </article>
     </section>
   );

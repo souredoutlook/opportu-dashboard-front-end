@@ -73,6 +73,7 @@ const constants = {
   COMPLETE: 'COMPLETE',
   INCOMPLETE: 'INCOMPLETE',
   LOADING: 'LOADING',
+  NOTFOUND: 'NOTFOUND',
 }
 
 module.exports = { parseParents, initialState, constants };

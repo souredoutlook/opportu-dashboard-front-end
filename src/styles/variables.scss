@@ -20,7 +20,7 @@ $spacing: 2rem;
 $spacing-slight: 0.5em;
 
 $card-width: 45rem;
-$card-height: 24rem;
+$card-height: calc(3.35em + 300px);
 $card-border-radius: 8px;
 
 $light-gray-background: linear-gradient(0deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), #C2C9D1;

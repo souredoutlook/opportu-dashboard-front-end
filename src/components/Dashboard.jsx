@@ -28,11 +28,11 @@ export default function Dashboard(props) {
   }, []);
 
   const rootValues = (dashData.assessments && dashData.assessments.core_values) || undefined;
-  const facets = (dashData.assessments && dashData.assessments.facets) || undefined;
+  
   return (
     <section className="dashboard">
       {rootValues && <RootValues rootValues={rootValues} />}
-      <Facet5 facets={facets}/>
+      <Facet5 dashData={dashData} setDashData={setDashData} />
     </section>
   );
 };

@@ -54,6 +54,7 @@
       margin: 0.1em;
     }
   }
+
   // &--form {
   //   padding: $spacing;
   //   width: 100%;
@@ -72,12 +73,14 @@
 
   // }
   
-  // &--error {
-  //   padding: $spacing-slight;
-  //   display: flex;
-  //   align-items: center;
-  //   border-radius: $card-border-radius;
-  // }
+  &--error {
+    height: 100%;
+    padding: $spacing-slight;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: $card-border-radius;
+  }
 
   .column {
     flex-direction: column;

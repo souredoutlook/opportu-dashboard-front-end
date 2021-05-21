@@ -29,20 +29,20 @@ export default function Navbar(props) {
       <div className='navbar--centered'>
         <ul className='navbar--list'>
           {userData.is_admin && 
-          <li>
+          <li className='heading'>
             <Link to='/admin'>
               Admin
             </Link>
           </li>}
           {userData.first_name && 
-          <li>
+          <li className='heading'>
             <Link to='/dashboard'>
               Dashboard
             </Link>
           </li>}
-          {userData.first_name && <li onClick={signOut}>Sign Out</li>}
+          {userData.first_name && <li className='heading' onClick={signOut}>Sign Out</li>}
           {!userData.first_name &&
-            <li>
+            <li className='heading'>
               <Link to='/signin'>
                 Sign In
               </Link>

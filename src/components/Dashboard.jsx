@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import RootValues from './dashboard/RootValues';
+import Facet5 from './dashboard/Facet5';
 
 import axios from 'axios';
 
@@ -27,16 +28,11 @@ export default function Dashboard(props) {
   }, []);
 
   const rootValues = (dashData.assessments && dashData.assessments.core_values) || undefined;
-
+  const facets = (dashData.assessments && dashData.assessments.facets) || undefined;
   return (
     <section className="dashboard">
       {rootValues && <RootValues rootValues={rootValues} />}
-      <article className="dashboard--card">
-      </article>
-      <article className="dashboard--card">
-      </article>
-      <article className="dashboard--card">
-      </article>
+      <Facet5 facets={facets}/>
     </section>
   );
 };

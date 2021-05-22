@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 
+import { capitalize } from '../../helpers/dashboard';
 
 import '../Dashboard.scss';
 
 export default function SliderGroup(props) {
   
  const {facets, setFacets, id} = props;
-
-  function capitalize(string) {
-    return string.split('').map((value,index)=>index === 0 ? value.toUpperCase() : value).join('')
-  };
   
   function handleChange(evt) {
     const value = Number(evt.target.value);

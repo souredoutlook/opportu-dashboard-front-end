@@ -8,7 +8,7 @@ import '../Dashboard.scss';
 
 
 const callbacks = {
-  // getWordColor: word => colors[-word.value], 
+  getWordColor: word => colors[-word.value], //comment this line out and import alternate colors from rootValues helper for random colors
   getWordTooltip: word => `#${-word.value}`,
 }
 
@@ -54,7 +54,7 @@ export default function RootValues(props) {
         <div className="dashboard--list">
             {parseValues(rootValues, false).map((element, index) => {
               return (
-                <p>#{index+1} - {element}</p>
+                <p className={index <= 4 ? 'top' : 'bottom'}>#{index+1} - {element}</p>
               )
             })}
         </div>} 

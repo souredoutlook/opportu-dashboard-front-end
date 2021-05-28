@@ -4,7 +4,7 @@ import axios from 'axios';
 import '../Admin.scss';
 
 export default function AssignAssessment() {
-  const [formData, setFormData] = useState({userId: 0, error: false, message: null});
+  const [formData, setFormData] = useState({userId: 0, assessment: 'values', error: false, message: null});
 
   const [userData, setUserData] = useState([]);
   
@@ -42,25 +42,25 @@ export default function AssignAssessment() {
   
     axios
       .post(
-      '/assessments/values',
+      `/assessments/${formData.assessment}`,
       { userId },
     )
     .then(response => {
       if (response.status === 200) {
-        setFormData({userId: 0, error: false, message: "Successful assignment!"});
+        setFormData({userId: 0, assessment: 'values', error: false, message: `${formData.assessment === 'values' ? 'Root Values' : 'Facet 5'} assessment was successfully assigned!`});
       }
     })
     .catch(err => {
-      setFormData({error: true}); 
+      setFormData(prev => ({...prev, error: true})); 
     });
   };
 
   function handleChange(event) {
-    const id = Number(event.target.value);
+    const { name, value } = event.target;
 
     setFormData((prev) => ({
       ...prev,
-      userId: id,
+      [name]: parseInt(value) || value,
       message: null,
     }));
   }
@@ -69,11 +69,23 @@ export default function AssignAssessment() {
     <>
       <h3>Assign Assessment</h3>
       <form className="admin--form">
-        <div className="admin--form--group column">
-          <label htmlFor="name">Select a user to assign an assessment to: </label>
+      <div className="admin--form--group column">
+          <label htmlFor="assessment">Select a user to assign an assessment to: </label>
           <select
-            name="name"
-            id="name"
+            name="assessment"
+            id="assessment"
+            onChange={handleChange}
+            value={formData.assessment}
+          >
+            <option value={'values'}>Root Values</option>
+            <option value={'facets'}>Facet 5</option>
+          </select>
+        </div>
+        <div className="admin--form--group column">
+          <label htmlFor="userId">Select a user to assign an assessment to: </label>
+          <select
+            name="userId"
+            id="userId"
             onChange={handleChange}
             value={formData.userId}
           >

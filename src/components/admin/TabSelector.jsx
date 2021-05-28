@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 
 import AddData from './AddData';
 import AssignAssessment from './AssignAssessment';
+import AssignUser from './AssignUser';
 
 import './TabSelector.scss';
 
@@ -29,6 +30,7 @@ export default function TabSelector(props) {
         setActiveTab(<AddData />)
         break;
       case 'AssignUser':
+        setActiveTab(<AssignUser />)
         break;
       case 'AssignAssessment':
         setActiveTab(<AssignAssessment />)

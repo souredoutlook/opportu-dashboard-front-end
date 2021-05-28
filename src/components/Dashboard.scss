@@ -50,9 +50,24 @@
     height: 100%;
     padding: $spacing;
 
+    .top {
+      background-color: $logo-dark;
+      color: $white;
+    }
+
+    .bottom {
+      background-color: $complimentary-dark;
+      color: $white;
+    }
+
     p{
       margin: 0.1em;
+      width: fit-content;
+      padding: 0.1em $spacing-slight 0.1em $spacing-slight;
+      border-radius: $button-border-radius;
     }
+
+
   }
 
   &--facets {

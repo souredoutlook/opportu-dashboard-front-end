@@ -5,27 +5,27 @@ import '../../Admin.scss';
 
 export default function AddTeam() {
 
-  const [userData, setUserData] = useState([]);
+  const [groupsData, setGroupsData] = useState([]);
   
-  const getUserData = function(setUserData) {
+  const getGroupsData = function(setGroupsData) {
     return axios
     .get(
-      '/users'
+      '/groups'
     )
     .then(response => {
-        setUserData([...response.data]);
+        setGroupsData([...response.data]);
     })
     .catch(err => {
       // setFormData(prev => ({...prev, error: true}));
     });
   };
     
-  //load userData on first render
+  //load groupsData on first render
   useEffect(()=>{
-    getUserData(setUserData);
+    getGroupsData(setGroupsData);
   },[])
 
-  const groupList = userData.filter(row => row.group_id !== null).map(row => {
+  const groupList = groupsData.filter(row => row.group_id !== null).map(row => {
     const string = `${row.group_name}`;
     
     return(

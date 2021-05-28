@@ -28,7 +28,7 @@ export default function AssignAssessment() {
 
   
   const nameList = userData.filter(row => row.id !== null).map(row => {
-    const string = `${row.email} - ${row.first_name} ${row.last_name}${row.group_name ? ' - ' + row.group_name : ''}`;
+    const string = `${row.email} - ${row.first_name} ${row.last_name}${row.team_name ? ' - ' + row.team_name : ''}${row.group_name ? ' - ' + row.group_name : ''}`;
     
     return(
       <option value={row.id} key={row.id}>

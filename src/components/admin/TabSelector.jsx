@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import CreateUser from './CreateUser';
+import AddData from './AddData';
 import AssignAssessment from './AssignAssessment';
 
 import './TabSelector.scss';
@@ -10,8 +10,8 @@ export default function TabSelector(props) {
   const { setActiveTab } = props;
 
   useEffect(()=>{
-    setActiveTab(<CreateUser />)
-  }, []);
+    setActiveTab(<AddData />)
+  },[])
 
   const onClick = (event)=> {
     const { id, parentNode } = event.target;
@@ -25,8 +25,8 @@ export default function TabSelector(props) {
     event.target.className = 'tabs--list--item selected';
 
     switch (id) {
-      case 'CreateUser':
-        setActiveTab(<CreateUser />)
+      case 'AddData':
+        setActiveTab(<AddData />)
         break;
       case 'AssignUser':
         break;
@@ -35,19 +35,17 @@ export default function TabSelector(props) {
         break;
       default: break;
     }
-
-
   }
 
   return (
     <nav className='tabs'>
       <ul className='tabs--list'>
         <li
-          id='CreateUser'
+          id='AddData'
           className='tabs--list--item selected'
           onClick={onClick}  
         >
-          Create User
+          Add Data
         </li>
         <li
           id='AssignUser'

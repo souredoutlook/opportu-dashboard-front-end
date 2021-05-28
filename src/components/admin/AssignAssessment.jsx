@@ -4,34 +4,38 @@ import axios from 'axios';
 import '../Admin.scss';
 
 export default function AssignAssessment() {
+  const [formData, setFormData] = useState({userId: 0, error: false, message: null});
 
   const [userData, setUserData] = useState([]);
-  const [formData, setFormData] = useState({userId: 0, error: false, message: null});
   
-  const nameList = userData.map(row => {
-    const string = `${row.first_name} ${row.last_name}${row.group_name ? ' - ' + row.group_name : ''}`;
+  const getUserData = function(setUserData) {
+    return axios
+    .get(
+      '/users'
+      )
+      .then(response => {
+          setUserData([...response.data]);
+      })
+      .catch(err => {
+        setFormData(prev => ({...prev, error: true}));
+      });
+    };
+    
+    //load userData on first render
+    useEffect(()=>{
+      getUserData(setUserData);
+    },[])
 
+  
+  const nameList = userData.filter(row => row.id !== null).map(row => {
+    const string = `${row.email} - ${row.first_name} ${row.last_name}${row.group_name ? ' - ' + row.group_name : ''}`;
+    
     return(
       <option value={row.id} key={row.id}>
         {string}
       </option>
     )
   });
-  
-  useEffect(()=>{
-    axios
-      .get(
-      '/users'
-    )
-    .then(response => {
-      if (response.status === 200) {
-        setUserData([...response.data]);
-      }
-    })
-    .catch(err => {
-      setFormData(prev => ({...prev, error: true}));
-    });
-  }, []);
 
   const assignAssessment = () => {
     const { userId } = formData;

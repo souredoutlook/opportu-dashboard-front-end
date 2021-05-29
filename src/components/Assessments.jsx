@@ -36,16 +36,92 @@ export default function Assessments() {
 
   function handleDragEnd(event) {
     const {over, active} = event;
-    
-    //handle when dragEnd happens outside of a droppable area or activeId is already dropped
-    for (const value in parent) {
-      if (parent[value].draggable && parent[value].draggable.key === active.id) {
-        setParent(prev => ({...prev, [value]: {...prev[value], draggable: null}}));
+    if (over) {
+      if (parent[over.id].draggable === null) {
+        //if dragEnd is over a Droppable component that has no Draggable child
+        setParent(prev => ({...prev, [over.id]: {...prev[over.id], draggable: draggableList.filter(element => element.key === active.id)[0]}}));
+      } else {
+        //if dragEnd is over a Droppable component that has a Draggable child
+        const nullKeyIndex = Object.entries(parent).filter(element => element[0] !== 'error').findIndex(element => element[1].draggable === null && element[1].value === '');
+        const droppableKeyIndex = Object.keys(parent).filter(element => element !== 'error').findIndex(element => element === over.id);
+        const formerDroppableKeyIndexOfActive = Object.entries(parent).filter(element => element[0] !== 'error').findIndex(element => element[1].draggable && element[1].draggable.key === active.id)
+
+        if (nullKeyIndex === -1) {
+          // if the DroppableList is full
+          // and the Draggable component was not a child prior to dragEnd, shift all Draggable children down one position and pop the last one off
+          if (formerDroppableKeyIndexOfActive <= -1) {
+            const shiftedParents = {};
+            for (let i = droppableKeyIndex; i < 9; i++) {
+              shiftedParents[`droppable${i + 1}`] = {...parent[`droppable${i}`]}
+            }
+            setParent(prev => ({...prev, ...shiftedParents, [over.id]: {value: '', draggable: draggableList.filter(element => element.key === active.id)[0]}}));
+          } else {
+            // and the Draggable component was a child,
+            if (droppableKeyIndex === formerDroppableKeyIndexOfActive) {
+              setParent(prev => ({...prev, [over.id]: {...prev[over.id], draggable: draggableList.filter(element => element.key === active.id)[0]}}));
+            } else if (droppableKeyIndex < formerDroppableKeyIndexOfActive) {
+              const shiftedParents = {};
+              for (let i = droppableKeyIndex; i < formerDroppableKeyIndexOfActive; i++) {
+                shiftedParents[`droppable${i + 1}`] = {...parent[`droppable${i}`]}
+              }
+              setParent(prev => ({...prev, ...shiftedParents, [over.id]: {value: '', draggable: draggableList.filter(element => element.key === active.id)[0]}}));
+            } else {
+              const shiftedParents = {};
+              for (let i = droppableKeyIndex; i > formerDroppableKeyIndexOfActive; i--) {
+                shiftedParents[`droppable${i - 1}`] = {...parent[`droppable${i}`]}
+              }
+              setParent(prev => ({...prev, ...shiftedParents, [over.id]: {value: '', draggable: draggableList.filter(element => element.key === active.id)[0]}}));
+            }
+          }
+        } else {
+          // if the DroppableList is not full
+          // and the Draggable component was not a child prior to dragEnd, shift all Draggable children down one position and pop the last one off
+          if (formerDroppableKeyIndexOfActive <= -1) {
+            // and nullKey index is less than droppableKeyIndex
+            if (nullKeyIndex < droppableKeyIndex) {
+              const shiftedParents = {};
+              for (let i = droppableKeyIndex; i > nullKeyIndex; i--) {
+                shiftedParents[`droppable${i - 1}`] = {...parent[`droppable${i}`]}
+              }
+              setParent(prev => ({...prev, ...shiftedParents, [over.id]: {value: '', draggable: draggableList.filter(element => element.key === active.id)[0]}}));
+            } else {
+              // and nullKey index is great than droppableKeyIndex
+              const shiftedParents = {};
+              for (let i = droppableKeyIndex; i < nullKeyIndex; i++) {
+                shiftedParents[`droppable${i + 1}`] = {...parent[`droppable${i}`]}
+              }
+              setParent(prev => ({...prev, ...shiftedParents, [over.id]: {value: '', draggable: draggableList.filter(element => element.key === active.id)[0]}}));
+            }
+          } else {
+            // and the Draggable component was a child,
+            if (droppableKeyIndex === formerDroppableKeyIndexOfActive) {
+              setParent(prev => ({...prev, [over.id]: {...prev[over.id], draggable: draggableList.filter(element => element.key === active.id)[0]}}));
+            }
+            // and formerDroppableKeyIndexOfActive is less than droppableKeyIndex
+            else if (formerDroppableKeyIndexOfActive  < droppableKeyIndex) {
+              const shiftedParents = {};
+              for (let i = droppableKeyIndex; i > formerDroppableKeyIndexOfActive; i--) {
+                shiftedParents[`droppable${i - 1}`] = {...parent[`droppable${i}`]}
+              }
+              setParent(prev => ({...prev, ...shiftedParents, [over.id]: {value: '', draggable: draggableList.filter(element => element.key === active.id)[0]}}));
+            } else {
+              // and formerDroppableKeyIndexOfActive  index is greater than droppableKeyIndex
+              const shiftedParents = {};
+              for (let i = droppableKeyIndex; i < formerDroppableKeyIndexOfActive; i++) {
+                shiftedParents[`droppable${i + 1}`] = {...parent[`droppable${i}`]}
+              }
+              setParent(prev => ({...prev, ...shiftedParents, [over.id]: {value: '', draggable: draggableList.filter(element => element.key === active.id)[0]}}));
+            }
+          }
+        }
       }
-    }
-    
-    if (over && active) {
-      setParent(prev => ({...prev, [over.id]: {...prev[over.id], draggable: draggableList.filter(element => element.key === active.id)[0]}}));
+    } else {
+      for (const value in parent) {
+        //handle when dragEnd happens outside of a droppable area
+        if (parent[value].draggable && parent[value].draggable.key === active.id) {
+          setParent(prev => ({...prev, [value]: {...prev[value], draggable: null}}));
+        }
+      }
     }
   };
   

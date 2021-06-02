@@ -19,6 +19,12 @@
     background-color: $white;
     border-radius: $card-border-radius;
     box-shadow: $box-shadow;
+    
+    &--header {
+      flex-direction: row;
+      display: flex;
+      justify-content: space-between;
+    }
   }
 
   &--toggle {

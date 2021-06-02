@@ -93,7 +93,6 @@ export default function AssignUser() {
 
   return (
     <>
-      <h3>Assign User</h3>
       <form className="admin--form">
         <div className="admin--form--group column">
           <label htmlFor="userId">Select the user to assign: </label>

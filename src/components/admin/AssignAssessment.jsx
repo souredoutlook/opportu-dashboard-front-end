@@ -1,105 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
+
+import Individual from './AssignAssessment/Individual';
+import Aggregate from './AssignAssessment/Aggregate'
 
 import '../Admin.scss';
 
 export default function AssignAssessment() {
-  const [formData, setFormData] = useState({userId: 0, assessment: 'values', error: false, message: null});
 
-  const [userData, setUserData] = useState([]);
-  
-  const getUserData = function(setUserData) {
-    return axios
-    .get(
-      '/users'
-      )
-      .then(response => {
-          setUserData([...response.data]);
-      })
-      .catch(err => {
-        setFormData(prev => ({...prev, error: true}));
-      });
-    };
-    
-    //load userData on first render
-    useEffect(()=>{
-      getUserData(setUserData);
-    },[])
+  const [formData, setFormData] = useState({function: 0})
 
-  
-  const nameList = userData.filter(row => row.id !== null).map(row => {
-    const string = `${row.email} - ${row.first_name} ${row.last_name}${row.team_name ? ' - ' + row.team_name : ''}${row.group_name ? ' - ' + row.group_name : ''}`;
-    
-    return(
-      <option value={row.id} key={row.id}>
-        {string}
-      </option>
-    )
-  });
+  const componentList = [<Individual />, <Aggregate />];
 
-  const assignAssessment = () => {
-    const { userId } = formData;
-  
-    axios
-      .post(
-      `/assessments/${formData.assessment}`,
-      { userId },
-    )
-    .then(response => {
-      if (response.status === 200) {
-        setFormData({userId: 0, assessment: 'values', error: false, message: `${formData.assessment === 'values' ? 'Root Values' : 'Facet 5'} assessment was successfully assigned!`});
-      }
-    })
-    .catch(err => {
-      setFormData(prev => ({...prev, error: true})); 
-    });
-  };
+  function handleChange(evt) {
+    const value = evt.target.value;
 
-  function handleChange(event) {
-    const { name, value } = event.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: parseInt(value) || value,
-      message: null,
-    }));
+      setFormData((prev) => ({
+        ...prev,
+        [evt.target.name]: value,
+      }));
   }
 
   return (
     <>
-      <h3>Assign Assessment</h3>
       <form className="admin--form">
-      <div className="admin--form--group column">
-          <label htmlFor="assessment">Select a user to assign an assessment to: </label>
-          <select
-            name="assessment"
-            id="assessment"
-            onChange={handleChange}
-            value={formData.assessment}
-          >
-            <option value={'values'}>Root Values</option>
-            <option value={'facets'}>Facet 5</option>
-          </select>
-        </div>
         <div className="admin--form--group column">
-          <label htmlFor="userId">Select a user to assign an assessment to: </label>
+          <label htmlFor="function" hidden={true}>Select an assessment type to assign:</label>
           <select
-            name="userId"
-            id="userId"
+            name="function"
+            id="function"
             onChange={handleChange}
-            value={formData.userId}
+            value={formData.function}
           >
-            <option value={0}>Select a user...</option>
-            {nameList}
+            <option value={0}>Assign An Individual Assessment</option>
+            <option value={1}>Assign An Aggregate Assessment</option>
           </select>
         </div>
       </form>
-      <button type="submit" onClick={assignAssessment}>Assign Assessment</button>
-      <div className="admin--error">
-        {formData.error && <p>Something went wrong...</p>}
-        {formData.message && <p>{formData.message}</p>}
-
-      </div>
+      {componentList[formData.function]}
     </>
   );
 };

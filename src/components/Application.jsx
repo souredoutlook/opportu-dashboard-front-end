@@ -32,8 +32,11 @@ export default function Application() {
         <Route path='/signin'>
           {first_name ? <Redirect to='/dashboard' /> : <SignIn setUserData={setUserData} /> }
         </Route>
-        <Route path='/dashboard'>
+        <Route exact path='/dashboard'>
           {first_name ? <Dashboard id={id}/> : <Redirect to='/signin' /> }
+        </Route>
+        <Route exact path='/dashboard/rootvalues'>
+          {first_name ? <Dashboard id={id} historicalRootValues={true}/> : <Redirect to='/signin' /> }
         </Route>
         <Route path='/assessments/:id'>
           {first_name ? <Assessments /> : <SignIn setUserData={setUserData} />}

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import ReactWordcloud from 'react-wordcloud';
 
-import { parseValues, colors } from '../../helpers/rootValues';
+import { colors, formatValuesForWordCloud, formatDate } from '../../helpers/rootValues';
 
 import '../Dashboard.scss';
 
@@ -19,9 +20,9 @@ export default function RootValues(props) {
   
   const [toggleState, setToggleState] = useState(true);
   
-  const { rootValues } = props;
+  const { rootValues, assessmentKey, list } = props;
   
-  const words = parseValues(rootValues, true);
+  const words = formatValuesForWordCloud(rootValues[assessmentKey]);
   
   const mql = window.matchMedia(
     '(max-width: 420px)'
@@ -41,7 +42,10 @@ export default function RootValues(props) {
 
   return (
     <article className="dashboard--card">
-        <h3>Root Values</h3>
+        <div className="dashboard--card--header">
+          <h3>{list ? formatDate(rootValues[assessmentKey]) : 'Root Values'}</h3>
+          {list ? <Link to="/dashboard">(go back)</Link> : <Link to="/dashboard/rootvalues">(view all)</Link>}
+        </div>
         {toggleState && 
         <div style={{ height: '100%', width: '100%' }}>
           <ReactWordcloud
@@ -52,9 +56,9 @@ export default function RootValues(props) {
         </div>}
         {!toggleState && 
         <div className="dashboard--list">
-            {parseValues(rootValues, false).map((element, index) => {
+            {rootValues[assessmentKey].values.map((element, index) => {
               return (
-                <p className={index <= 4 ? 'top' : 'bottom'}>#{index+1} - {element}</p>
+                <p className={index <= 4 ? 'top' : 'bottom'} key={index}>#{index+1} - {element}</p>
               )
             })}
         </div>} 

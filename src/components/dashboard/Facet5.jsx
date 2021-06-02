@@ -35,9 +35,9 @@ export default function Facet5(props) {
         }
         {facets && facets.affection && !toggleState &&
           <div className='dashboard--facets'>
-            {Object.keys(facets).map(value => {
+            {Object.keys(facets).map((value, index) => {
               return(
-                <p>{capitalize(value)} - {facets[value]}</p>
+                <p key={index}>{capitalize(value)} - {facets[value]}</p>
               );
             })}
             <a href={'https://www.facet5gps.com/'}>Maximize Facet 5 with Facet5 GPS</a>

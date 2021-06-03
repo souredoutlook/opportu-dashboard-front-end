@@ -49,11 +49,11 @@ export default function Settings(props) {
   };
 
   return (
-    <section className="signin">
-      <article className="signin--card">
+    <section className="settings">
+      <article className="settings--card">
         <h3>Change Password</h3>
-        <form className="signin--form">
-          <div className="signin--form--group">
+        <form className="settings--form">
+          <div className="settings--form--group">
             <label htmlFor="old_password">Old password</label>
             <input
               type="password"
@@ -63,7 +63,7 @@ export default function Settings(props) {
               onChange={handleChange}
             />
           </div>
-          <div className="signin--form--group">
+          <div className="settings--form--group">
             <label htmlFor="new_password">New password</label>
             <input
               type="password"
@@ -73,7 +73,7 @@ export default function Settings(props) {
               onChange={handleChange}
             />
           </div>
-          <div className="signin--form--group">
+          <div className="settings--form--group">
             <label htmlFor="match_password">Re-type new password</label>
             <input
               type="password"
@@ -85,7 +85,7 @@ export default function Settings(props) {
           </div>
         </form>
         <button type="submit" onClick={changePassword}>Change Password</button>
-        <div className="signin--error">
+        <div className="settings--error">
           {formData.error && !formData.message && <p>Something went wrong...</p>}
           {formData.message && <p>{formData.message}</p>}
         </div>

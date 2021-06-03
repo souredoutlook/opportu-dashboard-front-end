@@ -7,6 +7,7 @@ import Navbar from './Navbar';
 import SignIn from './SignIn';
 import Welcome from './Welcome';
 import Assessments from './Assessments';
+import Settings from './Settings';
 
 import './Application.scss';
 
@@ -23,13 +24,10 @@ export default function Application() {
           userData={userData}
           setUserData={setUserData}
         />
-        <Route exact path='/'>
-          <Welcome />
-        </Route>
-        <Route path='/admin'>
+        <Route exact path='/admin'>
           {first_name ? <Admin /> : <Redirect to='/signin' />}
         </Route>
-        <Route path='/signin'>
+        <Route exact path='/signin'>
           {first_name ? <Redirect to='/dashboard' /> : <SignIn setUserData={setUserData} /> }
         </Route>
         <Route exact path='/dashboard'>
@@ -40,6 +38,12 @@ export default function Application() {
         </Route>
         <Route path='/assessments/:id'>
           {first_name ? <Assessments /> : <SignIn setUserData={setUserData} />}
+        </Route>
+        <Route exact path='/settings'>
+          {first_name ? <Settings id={id}/> : <SignIn setUserData={setUserData} />}
+        </Route>
+        <Route exact path='/'>
+          <Welcome />
         </Route>
       </main>
     </Router>

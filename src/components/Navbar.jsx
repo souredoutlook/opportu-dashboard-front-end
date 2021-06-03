@@ -40,6 +40,12 @@ export default function Navbar(props) {
               Dashboard
             </Link>
           </li>}
+          {userData.first_name && 
+          <li className='heading'>
+            <Link to='/settings'>
+              Settings
+            </Link>
+          </li>}
           {userData.first_name && <li className='heading' onClick={signOut}>Sign Out</li>}
           {!userData.first_name &&
             <li className='heading'>

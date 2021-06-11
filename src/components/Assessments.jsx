@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { DndContext } from '@dnd-kit/core';
+import { DndContext, DragOverlay } from '@dnd-kit/core';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import Draggable from './assessments/Draggable';
 import DroppableList from './assessments/DroppableList';
-
 import coreValues from '../helpers/coreValues'
 import { parseParents, initialState, constants } from '../helpers/assessments'
 
@@ -16,6 +15,7 @@ const { FORBIDDEN, COMPLETE, LOADING, INCOMPLETE, NOTFOUND } = constants;
 export default function Assessments() {
   const [formState, setFormState] = useState(LOADING);
   const [parents, setParents] = useState(initialState);
+  const [activeId, setActiveId] = useState(null);
 
   const draggableList = coreValues.map((value, index) => {
     const id = `draggable${index}`;
@@ -50,8 +50,14 @@ export default function Assessments() {
     setParents(prev => ({...prev, ...shiftedParents, [over.id]: {value: '', draggable: draggableList.filter(element => element.key === active.id)[0]}}));
   };
 
+  function handleDragStart(event) {
+    setActiveId(event.active.id);
+    console.log(parseInt(event.active.id))
+  };
+
   function handleDragEnd(event) {
     const {over, active} = event;
+    setActiveId(null);
     if (over) {
       const formerDroppableKeyIndexOfActive = Object.entries(parents).filter(element => element[0] !== 'error').findIndex(element => element[1].draggable && element[1].draggable.key === active.id);
 
@@ -164,7 +170,7 @@ export default function Assessments() {
           (<>
             <h3>Root Values Assessment</h3>
             <div className="assessment--form">
-              <DndContext onDragEnd={handleDragEnd} >
+              <DndContext onDragEnd={handleDragEnd} onDragStart={handleDragStart}>
                 <form className="assessment--form wrap droppable">
                   <DroppableList 
                     parents={parents}
@@ -182,6 +188,13 @@ export default function Assessments() {
                     return element;
                   })}
                 </form>
+                <DragOverlay>
+                  {activeId ? (
+                    <button className='draggable'>
+                      {coreValues[parseInt(activeId.match(/\d+/)[0])]}
+                    </button>
+                  ): null}
+                </DragOverlay>
               </DndContext>
             </div>
             <button type="submit" onClick={submit}>Submit Assessment</button>

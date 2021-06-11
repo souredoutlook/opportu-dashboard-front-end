@@ -8,8 +8,6 @@ export default function Draggable(props) {
   });
 
   const style = {
-    // Outputs `translate3d(x, y, 0)`
-    transform: CSS.Translate.toString(transform),
     width: '10rem',
   };
 

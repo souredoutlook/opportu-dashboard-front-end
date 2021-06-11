@@ -7,7 +7,7 @@ export default function Droppable(props) {
   });
 
   const style = {
-    border: isOver ? '0.125em solid #E09D4B' : 'none',
+    border: isOver ? '0.125em solid #E09D4B' : '0.125em solid transparent',
   };
 
   return (

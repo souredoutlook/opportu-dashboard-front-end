@@ -172,7 +172,7 @@ export default function Assessments() {
                     handleChange={handleChange}
                   />
                 </form>
-                <form className="assessment--form row wrap">
+                <form className="assessment--form--draggable wrap">
                   {draggableList.filter(element => {
                     for (const value in parents) {
                       if (parents[value].draggable && parents[value].draggable.key === element.key) {

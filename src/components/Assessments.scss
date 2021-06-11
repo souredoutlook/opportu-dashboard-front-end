@@ -34,7 +34,16 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
+    }
 
+    &--draggable {
+      padding: $spacing;
+      width: 100%;
+      display:flex;
+      align-items: center;
+      flex-direction: column;
+      height: 75vh;
+      justify-content: flex-start;
     }
 
     input:focus, textarea:focus, select:focus{
@@ -107,10 +116,6 @@
   .row {
     flex-direction: row;
     padding: $spacing-slight;
-    
-    // *{
-    //   padding: $spacing-slight;
-    // }
   }
 
   .start {
@@ -130,6 +135,11 @@
     &--form {
       &--group {
         width: auto;
+      }
+
+      &--draggable {
+        height: 85vh;
+        justify-content: flex-start;
       }
     }
   }

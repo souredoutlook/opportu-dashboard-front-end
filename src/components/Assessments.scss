@@ -42,7 +42,7 @@
       display:flex;
       align-items: center;
       flex-direction: column;
-      height: 75vh;
+      height: 33em;
       justify-content: flex-start;
     }
 
@@ -137,10 +137,6 @@
         width: auto;
       }
 
-      &--draggable {
-        height: 85vh;
-        justify-content: flex-start;
-      }
     }
   }
 

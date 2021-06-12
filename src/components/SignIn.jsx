@@ -5,7 +5,7 @@ import './SignIn.scss';
 
 export default function SignIn(props) {
 
- const { setUserData } = props;
+ const { setUserData, assessments } = props;
 
  const [formData, setFormData] = useState({error: false});
 
@@ -40,7 +40,7 @@ export default function SignIn(props) {
   return (
     <section className="signin">
       <article className="signin--card">
-        <h3>Log in to My Dashboard</h3>
+        <h3>Log in to {assessments ? 'My Assessment' : 'My Dashboard'}</h3>
         <form className="signin--form">
           <div className="signin--form--group">
             <label htmlFor="email">email</label>

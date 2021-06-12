@@ -7,7 +7,7 @@ export default function SignIn(props) {
 
  const { setUserData, assessments } = props;
 
- const [formData, setFormData] = useState({error: false});
+ const [formData, setFormData] = useState({email: '', password: '', toggle: false, error: false});
 
 
 
@@ -30,7 +30,8 @@ export default function SignIn(props) {
   };
 
   function handleChange(event) {
-    const value = event.target.value;
+    const type = event.target.type;
+    const value = type === 'checkbox' ? event.target.checked : event.target.value;
     setFormData((prev) => ({
       ...prev,
       [event.target.name]: value,
@@ -48,19 +49,29 @@ export default function SignIn(props) {
               type="text"
               id="email"
               name="email"
-              value={formData.email || ''}
+              value={formData.email}
               onChange={handleChange}
             />
           </div>
           <div className="signin--form--group">
             <label htmlFor="password">password</label>
             <input
-              type="password"
+              type={formData.toggle ? "text" : "password"}
               id="password"
               name="password"
-              value={formData.password || ''}
+              value={formData.password}
               onChange={handleChange}
             />
+          </div>
+          <div className="signin--form--group toggle">
+            <input
+              type="checkbox"
+              id="toggle"
+              name="toggle"
+              checked={formData.toggle}
+              onChange={handleChange}
+            />
+            <label htmlFor="toggle">show password</label>
           </div>
         </form>
         <button type="submit" onClick={signIn}>Sign In</button>

@@ -176,6 +176,7 @@ export default function Assessments() {
                     parents={parents}
                     draggableList={draggableList}
                     handleChange={handleChange}
+                    setParents={setParents}
                   />
                 </form>
                 <form className="assessment--form--draggable wrap">
